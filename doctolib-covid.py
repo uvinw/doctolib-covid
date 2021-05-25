@@ -13,7 +13,7 @@ SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
 with open('centers.txt') as centers_txt:
     centers = centers_txt.readlines()
 centers = [center.strip() for center in centers if not center.startswith("#")] 
-
+ 
 with open('emails.txt') as emails_txt:
     emails = emails_txt.readlines()
 emails = [email.strip() for email in emails if not email.startswith("#")] 
@@ -108,6 +108,6 @@ try:
                 except KeyError as e:
                     print("KeyError: " + str(e))
 
-        time.sleep(5)
+        time.sleep(3)
 except KeyboardInterrupt:
     print("Mischief managed.")
