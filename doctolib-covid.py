@@ -22,10 +22,12 @@ with open('vaccines.txt') as vaccines_txt:
     vaccines = vaccines_txt.readlines()
 vaccines = [vaccine.strip() for vaccine in vaccines if not vaccine.startswith("#")]
 
+clear = lambda: os.system('clear')
+
 try:
     while (True):
         for center in centers:
-            
+            clear()
             data = requests.get(f"https://www.doctolib.de/booking/{center}.json").json()["data"]
 
             #https://www.doctolib.de/booking/ciz-berlin-berlin.json
@@ -85,11 +87,15 @@ try:
 
                     if nb_availabilities > 0:
                         print("RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN")
-                        os.system('play -nq -t alsa synth {} sine {}'.format(0.5, 800))
                         # open page in web browser
                         webbrowser.open(
                             "https://www.doctolib.de/profiles/" + str(data["profile"]["id"]))
                     if nb_availabilities > 0 and DISABLE_EMAIL != "true":
+                        print("RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN RUNNNNNNNNN")
+                        os.system('play -nq -t alsa synth {} sine {}'.format(1, 800))
+                        # open page in web browser
+                        webbrowser.open(
+                            "https://www.doctolib.de/profiles/" + str(data["profile"]["id"]))
                         context = ssl.create_default_context()
                         with smtplib.SMTP_SSL("smtp.gmail.com", 465, context = context) as server:
                             server.login(SENDER_EMAIL, SENDER_PASSWORD)
